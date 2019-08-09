@@ -1,0 +1,2 @@
+GLog.d("setting.gradle")
+ConfigUtils.addBuildListener(gradle)

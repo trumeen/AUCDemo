@@ -1,0 +1,7 @@
+{
+  "ApiUtilsClass": "com.blankj.utilcode.util.ApiUtils",
+  "implApis": {
+    "com/demo/feature1/export/Feature1Api": "{ implApiClass: com/demo/featrue1/pkg/Feature1ApiImpl, isMock: false }"
+  },
+  "noImplApis": []
+}
