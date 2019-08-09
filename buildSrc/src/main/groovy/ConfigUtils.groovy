@@ -117,7 +117,7 @@ class ConfigUtils {
                     for (Map.Entry entry : Config.depConfig[keys[1]][keys[2]]['libs'].entrySet()) {
                         GLog.d("addPkgLibs add dependence-->" + entry.key + " " + entry.value)
                         if (entry.value.isApply) {
-                            project.dependencies.add("implementation", entry.value.dep)
+                            project.dependencies.add(entry.value.dependenceType, entry.value.dep)
                         }
                     }
                 }

@@ -5,8 +5,14 @@ class DepConfig {
     boolean isApply //是否应用
     String path //最后的路径
     def dep //根据条件生成最终的依赖项
+    String dependenceType//依赖类型
     DepConfig(String path) {
         this(path, true)
+    }
+
+    DepConfig(String path, Boolean isApply, String dependenceType) {
+        this(path, isApply)
+        this.dependenceType = dependenceType
     }
 
     DepConfig(String path, boolean isApply) {

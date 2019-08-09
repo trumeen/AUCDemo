@@ -11,7 +11,7 @@ class Config {
     static leakcanary_version = '1.6.3'
 
     //appConfig 配置的是可以跑app模块的，git 提交务必只包含launcher
-    static appConfig = ['launcher']
+    static appConfig = ['launcher', "feature0"]
     //pkgConfig配置的是需要依赖的功能包，为空则全部依赖，git提交务必为空
     static pkgConfig = ["feature0"]
 
@@ -26,8 +26,8 @@ class Config {
                                     "com.blankj:feature-feature0-pkg:1.0", true),
                             export: new DepConfig(":feature:feature0:export"),
                             libs  : [
-                                    glide        : new DepConfig("com.github.bumptech.glide:glide:4.9.0"),
-                                    glideComplier: new DepConfig("com.github.bumptech.glide:compiler:4.9.0"),
+                                    glide        : new DepConfig("com.github.bumptech.glide:glide:4.9.0", true, "implementation"),
+                                    glideCompiler: new DepConfig("com.github.bumptech.glide:compiler:4.9.0", true, "annotationProcessor"),
                             ],
                     ],
                     feature1: [
