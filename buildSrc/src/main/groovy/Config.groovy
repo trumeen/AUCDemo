@@ -25,13 +25,17 @@ class Config {
                             pkg   : new DepConfig(true, ":feature:feature0:pkg",
                                     "com.blankj:feature-feature0-pkg:1.0", true),
                             export: new DepConfig(":feature:feature0:export"),
+                            libs  : [
+                                    glide        : new DepConfig("com.github.bumptech.glide:glide:4.9.0"),
+                                    glideComplier: new DepConfig("com.github.bumptech.glide:compiler:4.9.0"),
+                            ],
                     ],
                     feature1: [
                             app   : new DepConfig(":feature:feature1:app"),
                             pkg   : new DepConfig(":feature:feature1:pkg"),
                             export: new DepConfig(":feature:feature1:export"),
                     ],
-                    mock : new DepConfig(":feature:mock"),
+                    mock    : new DepConfig(":feature:mock"),
             ],
             lib          : [
                     base  : new DepConfig(":lib:base"),

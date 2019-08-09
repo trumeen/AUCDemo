@@ -39,6 +39,9 @@ class ConfigUtils {
                                 project.apply {
                                     from "${project.rootDir.path}/buildLib.gradle"
                                 }
+                                if (project.name == "pkg") {
+                                    addPkgLibs(project)
+                                }
                             }
                         }
                     }
@@ -103,6 +106,28 @@ class ConfigUtils {
     }
 
     /**
+     * 向模块中添加模块依赖
+     * @param project
+     */
+    private static addPkgLibs(Project project) {
+        def keys = project.path.split(":")
+        if (keys.length == 4) {
+            if (Config.depConfig[keys[1]] != null && Config.depConfig[keys[1]][keys[2]] != null) {
+                if (Config.depConfig[keys[1]][keys[2]]["libs"] != null) {
+                    for (Map.Entry entry : Config.depConfig[keys[1]][keys[2]]['libs'].entrySet()) {
+                        GLog.d("addPkgLibs add dependence-->" + entry.key + " " + entry.value)
+                        if (entry.value.isApply) {
+                            project.dependencies.add("implementation", entry.value.dep)
+                        }
+                    }
+                }
+            }
+        }
+
+
+    }
+
+    /**
      * 根据 depConfig 生成 dep
      */
     private static generateDep(Gradle gradle) {
@@ -156,6 +181,18 @@ class ConfigUtils {
         })
         GLog.d("getApplyPkgs = ${GLog.object2String(applyPkgs)}")
         return applyPkgs
+    }
+
+    static getApplyPkgLibs() {
+        def applyLibs = getDepConfigByFilter(new DepConfigFilter() {
+            @Override
+            boolean accept(String name, DepConfig config) {
+                if (!config.isApply) return false
+                return name.contains(".libs")
+            }
+        })
+        GLog.d("getLibsPkgs = ${GLog.object2String(applyLibs)}")
+        return applyLibs
     }
 
     static getApplyExports() {
